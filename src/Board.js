@@ -157,18 +157,6 @@
         }
       }
       return total > 1;
-      //this._isInBounds
-      // var checkDiagonal = function(outer, inner){
-      //   if(boardArray[outer][inner] === undefined){
-      //     if(total > 1){
-      //       return true;
-      //     } else {
-      //       return false;
-      //     }
-      //   }
-      //   total = total + boardArray[outer][inner];
-      //   checkDiagonal(outer+1, inner+1);
-      // }
     },
 
     // test if any major diagonals on this board contain conflicts
@@ -190,12 +178,28 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var total = 0;
+      var boardArray = this.rows();
+      for(var i = 0; i < boardArray.length; i++){
+        var row = i;
+        var column = minorDiagonalColumnIndexAtFirstRow - row;
+        if(this._isInBounds(row, column)){
+          total += boardArray[row][column];
+        }
+      }
+      return total > 1;
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      var boardArray = this.rows();
+      var n = boardArray.length;
+      for(var i =(n - 1)*2; i > 0; i--){
+        if(this.hasMinorDiagonalConflictAt(i) === true){
+          return true;
+        }
+      }
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
