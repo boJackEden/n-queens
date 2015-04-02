@@ -78,13 +78,33 @@
     // --------------------------------------------------------------
     //
     // test if a specific row on this board contains a conflict
+    // var cindy = [0, 1, 1, 0];
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      // console.log('giraffes are good')
+      var rowIndexTotal = 0;
+      var row = this.get(rowIndex);
+      for(var i=0; i<row.length; i++){
+
+        rowIndexTotal += row[i];
+      }
+      // if(rowIndexTotal>1){
+      //   return true;
+      // }
+      // else {
+      //   return false;
+      // }
+      return rowIndexTotal > 1;
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      var boardArray=this.rows();
+      for(var i = 0; i < boardArray.length; i++){
+        if(this.hasRowConflictAt(i) === true){
+          return true;
+        }
+      }
+      return false;
     },
 
 
@@ -94,12 +114,30 @@
     //
     // test if a specific column on this board contains a conflict
     hasColConflictAt: function(colIndex) {
-      return false; // fixme
+      var boardArray = this.rows();
+      var total = 0;
+      for(var i=0; i < boardArray.length; i++){
+        // console.log(boardArray[i][colIndex]);
+        total += boardArray[i][colIndex];
+      }
+      if(total > 1){
+        return true;
+      }
+      else{
+        return false;
+      }
     },
 
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
-      return false; // fixme
+      var boardArray=this.rows();
+      for(var i = 0; i < boardArray.length; i++){
+        if(this.hasColConflictAt(i) === true){
+          return true;
+        }
+      }
+      return false;
+
     },
 
 
